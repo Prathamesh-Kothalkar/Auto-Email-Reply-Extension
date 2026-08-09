@@ -1,0 +1,27 @@
+{
+  "name": "Email Reply Writer",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+
+  "action": {
+    "default_popup": "main.html",
+    "default_icon": "gmail.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end",
+      "css": ["content.css"]
+    }
+  ],
+    "permissions": ["activeTab", "storage", "tabs"],
+    "host_permissions": ["http://localhost:8080/*"],
+    "web_accessible_resources": [
+    {
+      "resources": ["content.js", "content.css","icons/*"],
+      "matches": ["https://mail.google.com/*"]
+    }
+]
+}
