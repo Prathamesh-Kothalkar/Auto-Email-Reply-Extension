@@ -3,9 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AI for Gmail</title>
+    
+    <!-- Google Fonts: Google Sans & Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Variable Definitions */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --gm-blue-600: #1a73e8;
+            --gm-blue-700: #0b57d0;
+            --gm-blue-50: #e8f0fe;
+            --gm-blue-100: #c2e7ff;
+            --gm-neutral-10: #ffffff;
+            --gm-neutral-20: #f8f9fa;
+            --gm-neutral-30: #f1f3f4;
+            --gm-neutral-200: #e3e3e3;
+            --gm-neutral-700: #444746;
+            --gm-neutral-900: #1f1f1f;
+            
+            --gm-radius-s: 8px;
+            --gm-radius-m: 16px;
+            --gm-radius-l: 24px;
+            --gm-radius-pill: 100px;
+            
+            --gm-elevation-1: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+            --gm-elevation-0: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gm-neutral-20);
+            color: var(--gm-neutral-900);
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: min(840px, 100%);
+            background: var(--gm-neutral-10);
+            border: 1px solid var(--gm-neutral-200);
+            border-radius: var(--gm-radius-l);
+            padding: 56px 48px 40px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Header */
+        .header-badge-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: var(--gm-radius-pill);
+            background: var(--gm-blue-50);
+            color: var(--gm-blue-700);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1px;
+        }
+
+        .badge svg {
+            fill: var(--gm-blue-700);
+        }
+
+        .logo-container {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gm-neutral-20);
+            border-radius: var(--gm-radius-m);
+            border: 1px solid var(--gm-neutral-200);
+        }
+
+        .logo-container img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 40px;
+            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            color: var(--gm-neutral-900);
+            margin-bottom: 16px;
+        }
+
+        .highlight {
+            color: var(--gm-blue-700);
+            font-weight: 500;
+        }
+
+        .description {
+            max-width: 600px;
+            margin: 0 auto 32px;
+            color: var(--gm-neutral-700);
+            font-size: 18px;
+            line-height: 1.5;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Action Buttons */
+        .cta-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 48px;
+            padding: 0 24px;
+            border-radius: var(--gm-radius-pill);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.1px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--gm-blue-700);
+            color: var(--gm-neutral-10);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--gm-blue-600);
+            box-shadow: var(--gm-elevation-0);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--gm-blue-700);
+            border: 1px solid var(--gm-neutral-200);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--gm-blue-50);
+            border-color: transparent;
+        }
+
+        /* Grid Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .feature {
+            padding: 24px 20px;
+            background: var(--gm-neutral-20);
+            border: 1px solid transparent;
+            border-radius: var(--gm-radius-m);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .feature:hover {
+            background: #ffffff;
+            border-color: var(--gm-neutral-200);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            border-radius: var(--gm-radius-s);
+            background: var(--gm-blue-100);
+            color: var(--gm-blue-700);
+        }
+
+        .feature-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--gm-blue-700);
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gm-neutral-900);
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: var(--gm-neutral-700);
+            font-size: 14px;
+            line-height: 1.43;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gm-neutral-200);
+            color: var(--gm-neutral-700);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 20px 24px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-        This is a AI based extension for gmail reply.
+
+    <main class="container">
+
+        <div class="logo-container">
+            <img src="gmail.png" alt="Gmail Logo">
+        </div>
+
+        <div class="header-badge-wrapper">
+            <div class="badge">
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5 1.5L9 4 6.5 10.5 0 13l6.5 2.5L9 22l2.5-6.5L18 13l-6.5-2.5z"/>
+                </svg>
+                Google Workspace Extension
+            </div>
+        </div>
+
+        <h1>Work smarter with <span class="highlight">Gemini for Gmail</span></h1>
+
+        <p class="description">
+            Understand complex threads instantly, draft tailored responses, and summarize long conversations without leaving your inbox.
+        </p>
+
+        <div class="cta-group">
+            <button class="btn btn-primary">Add to Chrome</button>
+            <button class="btn btn-secondary">Watch Demo</button>
+        </div>
+
+        <section class="features">
+
+            <article class="feature">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                    </svg>
+                </div>
+                <h3>Smart Replies</h3>
+                <p>Generate context-aware email replies tailored to your preferred length and tone.</p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 17H4v-2h10v2zm6-8H4V7h16v2zm0 4H4v-2h16v2zm0 4h-4v-2h4v2z"/>
+                    </svg>
+                </div>
+                <h3>Email Summaries</h3>
+                <p>Extract key action items, answers, and important dates from long threads in seconds.</p>
+            </article>
+
+            <article class="feature">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15 4H9v2h6V4zm3 4H6v2h12V8zm1 4H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2zm0 8H5v-6h14v6z"/>
+                    </svg>
+                </div>
+                <h3>Save Time</h3>
+                <p>Automate routine follow-ups and spend less time managing a busy inbox daily.</p>
+            </article>
+
+        </section>
+
+        <footer class="footer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+            Built for Google Workspace · Privacy & Security Guaranteed
+        </footer>
+
+    </main>
+
 </body>
 </html>

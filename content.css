@@ -1,0 +1,214 @@
+﻿/* =====================================================
+   AI REPLY BUTTON
+=====================================================
+*/
+.ai-reply-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 32px;
+    min-width: 90px;
+    padding: 0 12px;
+    border: 1px solid #dadce0;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #202124;
+    font-family: Google Sans, Roboto, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+}
+
+.ai-reply-button:hover {
+    background: #f8fafd;
+    border-color: #c5c7c9;
+    box-shadow: 0 1px 2px rgba(60,64,67,.15), 0 1px 3px rgba(60,64,67,.08);
+}
+
+.ai-reply-button:active {
+    background: #f1f3f4;
+}
+
+.ai-reply-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.ai-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    color: #1a73e8;
+}
+
+.ai-button-text {
+    line-height: 1;
+}
+
+/* =====================================================
+   SUMMARIZE BUTTON
+=====================================================*/
+
+ .ai-summarize-button {
+   display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    height: 32px;
+    min-width: 90px;
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dadce0;
+    border-radius: 16px;
+
+    background: #fff;
+    color: #202124;
+
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    outline: none;
+
+    pointer-events: auto;
+    
+}
+
+.ai-summarize-button:hover {
+    background: #f8fafd;
+    border-color: #c5c7c9;
+    box-shadow: 0 1px 2px rgba(60,64,67,.15), 0 1px 3px rgba(60,64,67,.08);
+}
+
+.ai-summarize-button:active {
+    background: #f1f3f4;
+}
+
+.ai-summarize-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.summarize-icon {
+    color: #1a73e8;
+}
+
+.summarize-text {
+    line-height: 1;
+} 
+
+
+
+/* =====================================================
+   SPINNER
+=====================================================
+*/
+.ai-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #dadce0;
+    border-top-color: #1a73e8;
+    border-radius: 50%;
+    animation: ai-spin 0.8s linear infinite;
+}
+
+@keyframes ai-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =====================================================
+   STATUS
+=====================================================
+*/
+.ai-status {
+    font-family: Google Sans, Roboto, Arial, sans-serif;
+    font-size: 12px;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.ai-status.generating {
+    color: #5f6368;
+}
+
+.ai-status.success {
+    color: #188038;
+}
+
+.ai-status.error {
+    color: #d93025;
+}
+
+/* =====================================================
+   SUMMARY RESULT
+=====================================================
+*/
+.ai-summary-popup {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    width: 360px;
+    max-height: 500px;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(60,64,67,.25);
+    z-index: 999999;
+    font-family: Google Sans, Roboto, Arial, sans-serif;
+}
+
+.ai-summary-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid #dadce0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #202124;
+}
+
+.ai-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-summary-close {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    color: #5f6368;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+.ai-summary-close:hover {
+    background: #f1f3f4;
+}
+
+.ai-summary-content {
+    padding: 16px;
+    color: #3c4043;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
